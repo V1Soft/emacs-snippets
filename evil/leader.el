@@ -29,10 +29,9 @@
 ;; vd -- vimish-fold-delete
 ;; <SPC> -- helm-M-x
 ;;; Code:
-(require 'evil-leader)
+(load-file "packages.el")
 
 (global-evil-leader-mode)
-(evil-leader-mode 1)
 (evil-leader/set-leader "<SPC>")
 (evil-leader/set-key
   "f" 'find-file
