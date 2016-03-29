@@ -9,19 +9,7 @@
 ;;
 ;;; Code:
 (load-file "packages.el")
-
-;; define movement macro
-(defmacro define-and-bind-text-object (key start-regex end-regex)
-  "Create new evil text object based on KEY, START-REGEX, and END-REGEX."
-  (let ((inner-name (make-symbol "inner-name"))
-        (outer-name (make-symbol "outer-name")))
-    `(progn
-       (evil-define-text-object ,inner-name (count &optional beg end type)
-         (evil-select-paren ,start-regex ,end-regex beg end type count nil))
-       (evil-define-text-object ,outer-name (count &optional beg end type)
-         (evil-select-paren ,start-regex ,end-regex beg end type count t))
-       (define-key evil-inner-text-objects-map ,key (quote ,inner-name))
-       (define-key evil-outer-text-objects-map ,key (quote ,outer-name)))))
+(load-file "functions.el")
 
 ;; keybindings
 (evil-mode 1)
@@ -41,6 +29,16 @@
 (define-key evil-motion-state-map "$" 'evil-beginning-of-line)
 (define-key evil-motion-state-map ";" 'evil-ex)
 (define-key evil-motion-state-map ":" 'evil-repeat-find-char)
+
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(global-set-key [escape] 'evil-exit-emacs-state)
+
 
 ;;; neo-tree
 (add-hook 'neotree-mode-hook

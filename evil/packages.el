@@ -6,6 +6,10 @@
 (require 'swiper)
 (require 'evil-leader)
 (require 'neotree)
+(require 'multiple-cursors)
+(require 'linum-relative)
+(require 'powerline)
+(require 'vimish-fold)
 
 (provide 'packages)
 ;;; packages.el ends here
