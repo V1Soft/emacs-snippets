@@ -5,17 +5,10 @@
 ;; Invert point color (https://www.reddit.com/r/emacs/comments/4c5g4i/help_how_do_i_change_the_cursor_to_have_the_same/)
 ;;
 ;;; Code:
-(require 'eyedropper)
-
-;; inverted cursor color
+(load-file "functions.el")
 
 ;;use a variable for easy switching
 (setq inverted-mouse-active t)
-(defun inverted-mouse-update ()
-  "Function for inverting the cursor color."
-  (interactive)
-  (if inverted-mouse-active
-      (set-cursor-color (eyedrop-foreground-at-point))))
 ;;add hook for inverting mouse
 (add-hook 'post-command-hook 'inverted-mouse-update)
 
