@@ -47,9 +47,29 @@
   "Local backup of normal state keymap.")
 (make-variable-buffer-local 'evilified-state--normal-state-map)
 
-(defvar bindings '((
-                    "a"
-                    )))
+(defun spacemacs/set-leader-keys (key def &rest bindings)
+  "Add KEY and DEF as key bindings under
+`dotspacemacs-leader-key' and `dotspacemacs-emacs-leader-key'.
+KEY should be a string suitable for passing to `kbd', and it
+should not include the leaders. DEF is most likely a quoted
+command. See `define-key' for more information about the possible
+choices for DEF. This function simply uses `define-key' to add
+the bindings.
+
+For convenience, this function will accept additional KEY DEF
+pairs. For example,
+
+\(spacemacs/set-leader-keys
+   \"a\" 'command1
+   \"C-c\" 'command2
+   \"bb\" 'command3\)"
+  (while key
+    (define-key spacemacs-default-map (kbd key) def)
+    (setq key (pop bindings) def (pop bindings))))
+
+(spacemacs/set-leader-keys
+ "f" 'find-file
+ "<ESC>" 'keyboard-quit)
 
 (evil-define-state evilified
   "Evilified state.
