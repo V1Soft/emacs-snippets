@@ -32,5 +32,13 @@ Version 2015-06-12"
                               (split-string (shell-command-to-string "fasd -d") "\n" t)))))
     (ivy-read "directories:" collection :action 'dired)))
 
+;; http://endlessparentheses.com/eval-result-overlays-in-emacs-lisp.html
+(defun endless/eval-overlay (value point)
+  (cider--make-result-overlay (format "%S" value)
+                              :where point
+                              :duration 'command)
+  ;; Preserve the return value.
+  value)
+
 (provide 'functions)
 ;;; functions.el ends here

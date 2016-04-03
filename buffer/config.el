@@ -22,7 +22,24 @@
   '(progn
      (add-to-list 'golden-ratio-exclude-modes "neotree-mode")
      ))
+;; http://endlessparentheses.com/eval-result-overlays-in-emacs-lisp.html
+(advice-add 'eval-region :around
+            (lambda (f beg end &rest r)
+              (endless/eval-overlay
+               (apply f beg end r)
+               end)))
 
+(advice-add 'eval-last-sexp :filter-return
+            (lambda (r)
+              (endless/eval-overlay r (point))))
+
+(advice-add 'eval-defun :filter-return
+            (lambda (r)
+              (endless/eval-overlay
+               r
+               (save-excursion
+                 (end-of-defun)
+                 (point)))))
 
 (provide 'config)
 ;;; config.el ends here

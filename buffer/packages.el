@@ -8,6 +8,7 @@
 (require 'golden-ratio)
 (require 'ace-window)
 (require 'ivy)
+(autoload 'cider--make-result-overlay "cider-overlays")
 
 (provide 'packages)
 ;;; packages.el ends here
