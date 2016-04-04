@@ -8,6 +8,7 @@
 (require 'golden-ratio)
 (require 'ace-window)
 (require 'ivy)
+(require 'ispell)
 (autoload 'cider--make-result-overlay "cider-overlays")
 
 (provide 'packages)

@@ -41,5 +41,10 @@
                  (end-of-defun)
                  (point)))))
 
+(define-key ctl-x-map "\C-i"
+  #'endless/ispell-word-then-abbrev)
+(setq save-abbrevs 'silently)
+(setq-default abbrev-mode t)
+derr
 (provide 'config)
 ;;; config.el ends here
